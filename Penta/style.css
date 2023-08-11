@@ -1,0 +1,53 @@
+.logobutton{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.modulebutton{
+  display: left;
+  font-size:18px;
+  justify-content: center;
+  margin: 0;
+}
+
+.homebutton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.rodape{
+  font-family: Arial, sans-serif;
+  font-size:11px;
+  text-align: center;
+  justify-content: center;
+  padding: 1rem
+}
+
+.camerabutton{
+  display: flex;
+  font-size:20px;
+  justify-content: center;
+  margin: 0;
+}
+
+.titlemodule{
+  display: flex;
+  font-size:18px;
+  justify-content: center;
+  margin: 0;
+}
+
+.estoquesearchbox{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}
+
+.audiobutton{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+}

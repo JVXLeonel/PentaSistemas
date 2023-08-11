@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="UTF-4">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penta - Consultas</title>
+
+<p></p>
+
+    <div class="homebutton">
+    <a href="home.html"> <img src="./icons/home.png" alt="Botão de Imagem"> </a>
+    </div>
+</head>
+
+<p></p>
+
+<body>
+    
+    <div class="camerabutton"> <button> Abrir Camera </button> </div>
+    <video id="cameraFeed" style="display: none;"></video>
+    <script src="https://cdn.jsdelivr.net/npm/quagga"></script>
+    <script>
+        const cameraButton = document.getElementById('cameraButton');
+        const cameraFeed = document.getElementById('cameraFeed');
+
+        async function startCamera() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                cameraFeed.srcObject = stream;
+                cameraFeed.style.display = 'block';
+            } catch (error) {
+                console.error('Erro ao acessar a câmera:', error);
+            }
+        }
+        cameraButton.addEventListener('click', () => {
+            startCamera();
+        });
+    </script>
+
+    <script>
+    const config = {
+        inputStream: {
+            type: "LiveStream",
+            constraints: {
+                width: { min: 640 },
+                height: { min: 480 },
+                facingMode: "environment",
+            },
+        },
+        locator: {
+            patchSize: "medium",
+            halfSample: true,
+        },
+        numOfWorkers: navigator.hardwareConcurrency || 4,
+        decoder: {
+            readers: ["code_128_reader", "ean_reader", "upc_reader"],
+        },
+        locate: true,
+    };
+    function initQuagga() {
+        Quagga.init(config, (err) => {
+            if (err) {
+                console.error("Erro ao inicializar o Quagga:", err);
+                return;
+            }
+            Quagga.start();
+        });
+        Quagga.onDetected(handleBarcode);
+    }
+    function handleBarcode(result) {
+        const code = result.codeResult.code;
+        console.log("Código de Barras Detectado:", code);
+    }
+    document.addEventListener("DOMContentLoaded", initQuagga);
+    </script>
+
+    <footer class="rodape">
+    <p>&copy; 2023 PentaSphere. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
